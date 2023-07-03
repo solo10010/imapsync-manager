@@ -1,23 +1,22 @@
-
 ```
- _                                                                                               
-(_)                                                                                              
- _ _ __ ___   __ _ _ __  ___ _   _ _ __   ___ ______ _ __ ___   __ _ _ __   __ _  __ _  ___ _ __ 
+ _
+(_)
+ _ _ __ ___   __ _ _ __  ___ _   _ _ __   ___ ______ _ __ ___   __ _ _ __   __ _  __ _  ___ _ __
 | | '_ ` _ \ / _` | '_ \/ __| | | | '_ \ / __|______| '_ ` _ \ / _` | '_ \ / _` |/ _` |/ _ \ '__|
-| | | | | | | (_| | |_) \__ \ |_| | | | | (__       | | | | | | (_| | | | | (_| | (_| |  __/ |   
-|_|_| |_| |_|\__,_| .__/|___/\__, |_| |_|\___|      |_| |_| |_|\__,_|_| |_|\__,_|\__, |\___|_|   
-                  | |         __/ |                                               __/ |          
-                  |_|        |___/                                               |___/                                                                       
+| | | | | | | (_| | |_) \__ \ |_| | | | | (__       | | | | | | (_| | | | | (_| | (_| |  __/ |
+|_|_| |_| |_|\__,_| .__/|___/\__, |_| |_|\___|      |_| |_| |_|\__,_|_| |_|\__,_|\__, |\___|_|
+                  | |         __/ |                                               __/ |
+                  |_|        |___/                                               |___/
 ```
 
-# ОПИСАНИЕ
+# DESCRIPTION
 
-imapsync-manager - скрипт на bash надстройка над утилитой imapsync, скрипт помогает мигрировать и проверить размер почты, также определяет почтовые ящики с которыми есть проблемы доступа, скрипт примечателен тем что выводит аккуратную и понятную информацию, в человеко читаемом виде.
+imapsync-manager - bash script is an add-on for the imapsync utility, the script helps to migrate and check the size of the mail, it also determines the mailboxes with which there are access problems, the script is notable for the fact that it displays accurate and understandable information in a human-readable form.
 
-# УСТАНОВКА
+# INSTALLATION
 
-!ВНИМАНИЕ - *сама утилита уже должны быть установлена в системе проверьте просто запустив в консоли imapsync
-если утилита отсутствует установите следуя руководству автора*  https://imapsync.lamiral.info/#install
+!ATTENTION - *the utility itself must already be installed in the system, check it simply by running imapsync in the console
+if the utility is missing, install following the author's instructions *  https://imapsync.lamiral.info/#install
 
 ```
 git clone https://github.com/solo10010/imapsync-manager
@@ -26,57 +25,62 @@ chmod +x sync.sh
 ./sync.sh --help
 ```
 
-Для использования утилиты на почтовых ящиках создайте файл listmail.txt
+To use the utility on mailboxes, create a listmail.txt file
 
 ```
 touch listmail.txt
 ```
 
-Заполните файл следую этому шаблону
+Fill out the file following this template
 
 ```
-хост001_1;пользователь001_1;пароль001_1;хост001_2;пользователь001_2;пароль001_2;
-хост002_1;пользователь002_1;пароль002_1;хост002_2;пользователь002_2;пароль002_2;
-хост003_1;пользователь003_1;пароль003_1;хост003_2;пользователь003_2;пароль003_2;
+host001_1;user001_1;password001_1;host001_2;user001_2;password001_2;
+host002_1;user002_1;password002_1;host002_2;user002_2;password002_2;
+host003_1;user003_1;password003_1;host003_2;user003_2;password003_2;
 ```
 
-# СПРАВКА
+# REFERENCE
 
 ```
-~/imapsync-manager (master*) # ./sync.sh --help                               
+~/imapsync-manager (master*) # ./sync.sh --help
 
- Использование: ./sync.sh [options...] -f --file <email_sunc.txt>
+ Usage: ./sync.sh [options...] -f --file <email_sunc.txt>
                 -m --migrate <start_mail_migrate> -s --size <check_mail_size>
 
-  -f, --file            <mail.txt> Выбор файла с внесенными ящиками для переноса
-  -m, --migrate         Запустить миграцию почты из файла выбранного в -f
-  -s, --size            проверить размер почты на переносимых и перенесенных ящиках из файла -f
+  -f, --file            <mail.txt> Selecting a file with entered boxes for transfer
+  -m, --migrate         Run mail migration from file selected to -f
+  -s, --size            check mail size on portable and migrated mailboxes from a file -f
+  -p, --port            pass default SMTP port value always 993
 
-  Пример заполнения почтовых ящиков в файл для переноса
+  An example of filling mailboxes into a file for transfer
 
-  хост001_1;пользователь001_1;пароль001_1;хост001_2;пользователь001_2;пароль001_2;
-  хост002_1;пользователь002_1;пароль002_1;хост002_2;пользователь002_2;пароль002_2;
-  хост003_1;пользователь003_1;пароль003_1;хост003_2;пользователь003_2;пароль003_2;
+  host001_1;user001_1;password001_1;host001_2;user001_2;password001_2;
+  host002_1;user002_1;password002_1;host002_2;user002_2;password002_2;
+  host003_1;user003_1;password003_1;host003_2;user003_2;password003_2;
 
 ```
 
-# ПРИМЕРЫ ЗАПУСКА
+# LAUNCH EXAMPLES
 
-Проверить ращзмер почтовых ящиков
+Check mailbox size
 ```
 ./sync.sh --file listmail.txt --size
 ```
 
-Запустить миграци всех почтовых ящиков
+Run migration of all mailboxes
 
 ```
 ./sync.sh --file listmail.txt --migrate
 ```
+Run mailbox size check by port 143
+```
+./sync.sh --file listmail.txt --port 143 --size
+```
 
-Примеры вывода утилиты в разных режимах запуска
+Examples of utility output in different launch modes
 
 ```
-~/imapsync-manager (master*) # ./sync.sh --file listmail.txt --size                               
+~/imapsync-manager (master*) # ./sync.sh --file listmail.txt --size
 ==================== start check mails (3)  =====================
 perenos1@oibai.ru: success login MailSize:5.14 MB Folder:5 -> perenos2@oibai.ru: success login MailSize:5.14 MB Folder:5 <-> SUCCES!
 perenos3@oibai.ru: success login MailSize:0 KB Folder:5 -> perenos4@oibai.ru: success login MailSize:0 KB Folder:5 <-> SUCCES!
@@ -104,7 +108,8 @@ perenos3@oibai.ru: failed login -> perenos3@oibai.ru: failed login -X FAILED!
 ============ Error Summary sync_errors.log ======================
 NO ERROR LOG FILE
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-~/imapsync-manager (master*) #                                 
+~/imapsync-manager (master*) #
 ```
+
 
 
